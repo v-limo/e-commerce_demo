@@ -1,2 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
-export default {}
+import { createStore } from "redux"
+import { counterReducer } from "../reducers/counterReducer"
+
+const store = createStore(counterReducer)
+
+export default store
