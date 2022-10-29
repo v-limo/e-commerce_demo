@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react"
+import { Product } from "./pages/Product"
+import { ProductType } from "./types"
 
 function App() {
+  const [products, setProducts] = useState<ProductType[]>([])
+
+  const fetchProducts = async () => {
+    const res = await fetch("https://api.escuelajs.co/api/v1/products")
+    const data = (await res.json()) as ProductType[]
+    setProducts(data)
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex justify-center p-3 bg-red-200">
+      <div className="flex  flex-wrap p-2  justify-center">
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
