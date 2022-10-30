@@ -18,4 +18,8 @@ export type RESET = {
   type: CounterActionTypes.RESET
 }
 
+export type CounterState = {
+  counter: number
+}
+
 export type CounterAction = INCREMENT | DECREMENT | RESET
