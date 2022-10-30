@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Home } from "./pages/Home"
 import { Product } from "./pages/Product"
 import {
   fetchProductsError,
@@ -31,12 +32,14 @@ function App() {
   }, [dispatch])
 
   return (
-    <div className="flex justify-center p-3 bg-red-200">
+    <div className="flex flex-col justify-center p-3 bg-red-200">
+      <Home />
       <div className="flex  flex-wrap p-2  justify-center">
         {products.map((product) => (
           <Product key={product.id} product={product} />
         ))}
       </div>
+
     </div>
   )
 }
