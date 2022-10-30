@@ -1,12 +1,21 @@
 import { useFormik } from "formik"
+import * as Yup from "yup"
 
 export const Home = () => {
   const formik = useFormik({
     initialValues: {
       search: "",
     },
-    onSubmit: (values) => {
+    validationSchema: Yup.object({
+      search: Yup.string()
+        .required("search is required")
+        .min(3, "search must be 3 characters"),
+    }),
+    validateOnChange: true,
+
+    onSubmit(values, formikHelpers) {
       console.log(values)
+      console.log(formikHelpers)
     },
   })
 
@@ -31,6 +40,9 @@ export const Home = () => {
           Submit
         </button>
       </form>
+      {formik.touched.search && formik.errors.search ? (
+        <div className="text-red-500">{formik.errors.search}</div>
+      ) : null}
     </div>
   )
 }
