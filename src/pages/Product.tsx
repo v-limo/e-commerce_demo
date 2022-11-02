@@ -1,8 +1,15 @@
 import { ProductProps } from "../types"
 import { useDispatch } from "react-redux"
 import { cartActionCreator } from "../redux/actionCreators/cartActionCreator"
+
 export const Product = ({ product }: ProductProps) => {
   const dispatch = useDispatch()
+
+  // check if the product is empty
+  if (!product) return null
+
+  if (Object.keys(product).length === 0)
+    return <div className="text-2xl">No product found</div>
 
   return (
     <div className="flex flex-col justify-evenly shadow-lg rounded-xl p-2 h-auto w-1/4 m-4 bg-red-100 hover:shadow-5xl hover:bg-white">

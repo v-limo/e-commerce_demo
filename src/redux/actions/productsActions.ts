@@ -1,4 +1,3 @@
-import { Product } from "../../pages/Product"
 import { ProductType } from "../../types"
 
 export enum ProductActionTypes {

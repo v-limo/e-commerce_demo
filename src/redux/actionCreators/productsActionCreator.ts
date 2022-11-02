@@ -1,6 +1,7 @@
 import { RootState } from "./../reducers/index"
 import { ProductType } from "../../types"
 import { ProductActionTypes } from "../actions/productsActions"
+import { Dispatch } from "redux"
 
 export const fetchProductStart = () => {
   return {
@@ -22,12 +23,12 @@ export const fetchProductsError = (error: string) => {
   }
 }
 
-export const fetchProductThubk = async (url: string) => {
-  return (dispatch: any, getState: RootState) => {
+export const fetchProductThubk = (url: string) => {
+  return (dispatch: Dispatch, getState: () => RootState) => {
     dispatch(fetchProductStart())
     fetch(url)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: ProductType[]) => {
         dispatch(fetchProductsSuccess(data))
       })
       .catch((err) => {

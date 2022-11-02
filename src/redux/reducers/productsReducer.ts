@@ -24,6 +24,7 @@ export const productsReducer = (
       return {
         ...state,
         loading: false,
+        error: null,
         products: action.payload,
       }
     case ProductActionTypes.FETCH_PRODUCTS_ERROR:
